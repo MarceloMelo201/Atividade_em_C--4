@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+typedef struct {
+	
+	char materia[3][200];
+	int nota[3][3];
+	float media[3];
+	
+}materia;
+
+int main(){
+	setlocale(LC_ALL, "");
+	int i, j;
+	materia materia;
+	int soma[3] = {0, 0, 0};
+	float peso[3] = {3, 3, 4};
+	
+	for(i=0;i<3; i++){
+		
+		soma[i] = 0;
+		
+		printf("Digite a [%d]ª matéria: ", i+1);
+		fgets(materia.materia[i], sizeof(materia.materia[i]), stdin);
+		
+		for(j=0; j<3; j++){
+			
+			printf("Digite a [%d]ª nota: ", j+1);
+			scanf("%d", &materia.nota[i][j]);
+			
+			fflush(stdin);
+			
+			soma[i] += materia.nota[i][j];
+			
+			if(materia.nota[i][j] < 0 || materia.nota[i][j] > 10 ){
+				system("cls");
+				printf("Digite uma nota válida!");
+				sleep(1);
+				system("cls");
+				j--;
+			}
+			
+		}
+		printf("\n");
+	}
+	
+	system("cls");
+	
+			for(i=0;i<3; i++){
+				
+				printf("\nMatéria: %s", materia.materia[i]);
+				
+				for(j=0; j<3; j++){
+					
+					printf("[%d]ª nota: %d\n", j+1, materia.nota[i][j]);
+				}
+					printf("\n");
+					
+					materia.media[i] = (materia.nota[i][0] * peso[0] + materia.nota[i][1] * peso[1] + materia.nota[i][2] * peso[2]) / 10;
+					
+					printf("Média: %.1f\n", materia.media[i]);
+			}
+	
+	
+	
+	
+	
+	return 0;
+}
